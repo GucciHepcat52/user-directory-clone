@@ -1,0 +1,53 @@
+.Display {
+  box-sizing: border-box;
+  height: 100%;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  background-color: lightgrey;
+  height: 90%;
+  width: 100%;
+}
+
+.nav-bar {
+  box-sizing: border-box;
+  height: 10%;
+  width: 100%;
+  background-color: rgb(53, 49, 49);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.middle-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.middle-btns > button {
+  height: 2em;
+  width: 5em;
+  background-color: rgb(91, 175, 253);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.direction-btns {
+  height: 2em;
+  width: 7em;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background-color: rgb(53, 49, 49);
+  color: lightgrey;
+  cursor: pointer;
+}
