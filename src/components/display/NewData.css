@@ -1,0 +1,40 @@
+.new-data-container {
+  width: 15vw;
+  height: 51.5vh;
+  position: fixed;
+  top: 23vh;
+  left: 41vw;
+  background-color: white;
+  border: 2px black solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+#hidden {
+  visibility: hidden;
+}
+
+label {
+  font-weight: bold;
+}
+
+button {
+  border-radius: 5px;
+  height: 2em;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgb(91, 175, 253);
+  color: white;
+  font-weight: bold;
+}
+
+input {
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 1.7em;
+  margin-bottom: 0.5em;
+  padding: 5px;
+  font-size: 16px;
+}
