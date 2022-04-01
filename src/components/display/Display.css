@@ -11,6 +11,9 @@
   background-color: lightgrey;
   height: 90%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .nav-bar {
@@ -50,4 +53,39 @@
   background-color: rgb(53, 49, 49);
   color: lightgrey;
   cursor: pointer;
+}
+
+.counter {
+  font-weight: bold;
+  align-self: flex-end;
+  margin-right: 0.5em;
+}
+
+.user-display {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3.5em;
+}
+
+.name {
+  text-decoration: underline;
+  text-decoration-color: rgb(91, 175, 253);
+  margin-bottom: 1.5em;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 1.5em;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.info > p {
+  font-weight: normal;
 }
