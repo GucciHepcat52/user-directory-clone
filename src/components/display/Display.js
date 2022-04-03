@@ -10,7 +10,7 @@ export default function Display() {
   const person = userData[index];
   const [displayNew, setDisplayNew] = useState(false)
 
-  console.log(userData);
+  // console.log(userData);
 
   function prevHandler() {
     if (counter > 1) {
