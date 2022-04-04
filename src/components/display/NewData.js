@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./NewData.css";
+import { DataContext } from "../App";
 
 export default function NewData(props) {
+  const { userData, setUserData } = useContext(DataContext);
   const [newPerson, setNewPerson] = useState({
     city: "",
     country: "",
     employer: "",
-    favoriteMovies: [],
+    favoriteMovies: ["", "", ""],
     name: {
       first: "",
       last: "",
@@ -50,27 +52,25 @@ export default function NewData(props) {
     });
   }
 
-  // function handleFirstMovie(event) {
-  //   const first = [...newPerson.favoriteMovies, event.target.value];
-  //   setNewPerson((prevNewPerson) => {
-  //     return {
-  //       ...prevNewPerson,
-  //       favoriteMovies: first,
-  //     };
-  //   });
-  //   console.log(newPerson.favoriteMovies);
-  // }
+  function handleMovieChange(event) {
+    const { name, value } = event.target;
+    setNewPerson((prevNewPerson) => {
+      const newArray = (prevNewPerson.favoriteMovies[name] = value);
+      return {
+        ...prevNewPerson,
+        favoriteMovies: [...prevNewPerson.favoriteMovies, newArray].filter(
+          (movie, index) => index < 3
+        ),
+      };
+    });
+  }
 
-  // function handleSecondMovie(event) {
-  //   const second = [...newPerson.favoriteMovies, event.target.value];
-  //   setNewPerson((prevNewPerson) => {
-  //     return {
-  //       ...prevNewPerson,
-  //       favoriteMovies: second,
-  //     };
-  //   });
-  //   console.log(newPerson.favoriteMovies);
-  // }
+  function handleSubmit() {
+    const addedPerson = {...newPerson, id: userData.length + 1}
+    setUserData((prevData) => {
+      return [...prevData, addedPerson];
+    });
+  }
 
   return (
     <div className="new-data-container" id={props.display ? null : "hidden"}>
@@ -130,10 +130,10 @@ export default function NewData(props) {
         />{" "}
         <br />
         <label>Enter Your Top 3 Movies:</label> <br />
-        <input type="text" /> <br />
-        <input type="text" /> <br />
-        <input type="text" /> <br />
-        <button>Submit</button>
+        <input type="text" name="0" onChange={handleMovieChange} /> <br />
+        <input type="text" name="1" onChange={handleMovieChange} /> <br />
+        <input type="text" name="2" onChange={handleMovieChange} /> <br />
+        <button onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );

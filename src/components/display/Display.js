@@ -83,7 +83,7 @@ export default function Display() {
           {"Next >"}
         </button>
       </div>
-        <NewData display={displayNew}/>
+        <NewData display={displayNew} />
     </div>
   );
 }
