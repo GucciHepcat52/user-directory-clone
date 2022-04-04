@@ -8,7 +8,7 @@ export default function Display() {
   const [index, setIndex] = useState(0);
   const [counter, setCounter] = useState(1);
   const person = userData[index];
-  const [displayNew, setDisplayNew] = useState(false)
+  const [displayNew, setDisplayNew] = useState(false);
 
   // console.log(userData);
 
@@ -25,6 +25,10 @@ export default function Display() {
     setUserData((prevUserData) => {
       const newState = [...prevUserData];
       newState.splice(index, 1);
+      if (index > 1) {
+        setIndex(index - 1);
+        setCounter(counter - 1);
+      }
       return newState;
     });
   }
@@ -83,7 +87,7 @@ export default function Display() {
           {"Next >"}
         </button>
       </div>
-        <NewData display={displayNew} />
+      <NewData display={displayNew} />
     </div>
   );
 }

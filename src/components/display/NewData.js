@@ -65,7 +65,8 @@ export default function NewData(props) {
     });
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
     const addedPerson = {...newPerson, id: userData.length + 1}
     setUserData((prevData) => {
       return [...prevData, addedPerson];
