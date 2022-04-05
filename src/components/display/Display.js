@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { DataContext } from "../App";
 import "./Display.css";
 import NewData from "./NewData";
+import EditData from "./EditData";
 
 export default function Display() {
   const { userData, setUserData } = useContext(DataContext);
@@ -9,6 +10,7 @@ export default function Display() {
   const [counter, setCounter] = useState(1);
   const person = userData[index];
   const [displayNew, setDisplayNew] = useState(false);
+  const [displayEdit, setDisplayEdit] = useState(false);
 
   // console.log(userData);
 
@@ -79,7 +81,7 @@ export default function Display() {
           {"< Previous"}
         </button>
         <div className="middle-btns">
-          <button>{"Edit"}</button>
+          <button onClick={() => setDisplayEdit(!displayEdit)}>{"Edit"}</button>
           <button onClick={deleteHandler}>{"Delete"}</button>
           <button onClick={() => setDisplayNew(!displayNew)}>{"New"}</button>
         </div>
@@ -88,6 +90,7 @@ export default function Display() {
         </button>
       </div>
       <NewData display={displayNew} />
+      <EditData display={displayEdit} person={person} index={index} />
     </div>
   );
 }

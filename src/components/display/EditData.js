@@ -1,0 +1,165 @@
+import React, { useState, useContext, useEffect } from "react";
+import "./NewData.css";
+import { DataContext } from "../App";
+
+export default function EditData(props) {
+  const { userData, setUserData } = useContext(DataContext);
+  const [newPerson, setNewPerson] = useState({
+    city: props.person.city,
+    country: props.person.country,
+    employer: props.person.employer,
+    favoriteMovies: [
+      props.person.favoriteMovies[0],
+      props.person.favoriteMovies[1],
+      props.person.favoriteMovies[2],
+    ],
+    name: {
+      first: props.person.name.first,
+      last: props.person.name.last,
+    },
+    title: props.person.title,
+  });
+
+//   console.log(props.person);
+//   console.log(props.index);
+
+  useEffect(() => {
+    setNewPerson({
+      city: props.person.city,
+      country: props.person.country,
+      employer: props.person.employer,
+      favoriteMovies: [
+        props.person.favoriteMovies[0],
+        props.person.favoriteMovies[1],
+        props.person.favoriteMovies[2],
+      ],
+      name: {
+        first: props.person.name.first,
+        last: props.person.name.last,
+      },
+      title: props.person.title,
+    });
+  }, [props.person]);
+
+  function handleFirstNameChange(event) {
+    const { value } = event.target;
+    setNewPerson((prevNewPerson) => {
+      return {
+        ...prevNewPerson,
+        name: {
+          ...prevNewPerson.name,
+          first: value,
+        },
+      };
+    });
+  }
+
+  function handleLastNameChange(event) {
+    const { value } = event.target;
+    setNewPerson((prevNewPerson) => {
+      return {
+        ...prevNewPerson,
+        name: {
+          ...prevNewPerson.name,
+          last: value,
+        },
+      };
+    });
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setNewPerson((prevNewPerson) => {
+      return {
+        ...prevNewPerson,
+        [name]: value,
+      };
+    });
+  }
+
+  function handleMovieChange(event) {
+    const { name, value } = event.target;
+    setNewPerson((prevNewPerson) => {
+      const newArray = (prevNewPerson.favoriteMovies[name] = value);
+      return {
+        ...prevNewPerson,
+        favoriteMovies: [...prevNewPerson.favoriteMovies, newArray].filter(
+          (movie, index) => index < 3
+        ),
+      };
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const oldArray = [...userData];
+    oldArray.splice(props.index, 1, newPerson)
+    setUserData(oldArray)
+  }
+
+  return (
+    <div className="new-data-container" id={props.display ? null : "hidden"}>
+      <form>
+        <label htmlFor="fname">Enter First Name:</label> <br />
+        <input
+          type="text"
+          id="fname"
+          name="first"
+          value={newPerson.name.first}
+          onChange={handleFirstNameChange}
+        />{" "}
+        <br />
+        <label htmlFor="lname">Enter Last Name:</label> <br />
+        <input
+          type="text"
+          id="lname"
+          name="last"
+          value={newPerson.name.last}
+          onChange={handleLastNameChange}
+        />{" "}
+        <br />
+        <label htmlFor="job">Enter Job Title:</label> <br />
+        <input
+          type="text"
+          id="job"
+          name="title"
+          value={newPerson.title ? newPerson.title : ""}
+          onChange={handleChange}
+        />{" "}
+        <br />
+        <label htmlFor="employer">Enter Employer:</label> <br />
+        <input
+          type="text"
+          id="employer"
+          name="employer"
+          value={newPerson.employer ? newPerson.employer : ""}
+          onChange={handleChange}
+        />{" "}
+        <br />
+        <label htmlFor="city">Enter City:</label> <br />
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value={newPerson.city}
+          onChange={handleChange}
+        />{" "}
+        <br />
+        <label htmlFor="country">Enter Country:</label> <br />
+        <input
+          type="text"
+          id="country"
+          name="country"
+          value={newPerson.country}
+          onChange={handleChange}
+        />{" "}
+        <br />
+        <label>Enter Your Top 3 Movies:</label> <br />
+        <input type="text" name="0" value={newPerson.favoriteMovies[0]} onChange={handleMovieChange} /> <br />
+        <input type="text" name="1" value={newPerson.favoriteMovies[1]} onChange={handleMovieChange} /> <br />
+        <input type="text" name="2" value={newPerson.favoriteMovies[2]} onChange={handleMovieChange} /> <br />
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
+    </div>
+  );
+}
